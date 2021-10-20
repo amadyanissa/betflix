@@ -8,8 +8,8 @@ export default function SectionList({sectionTitle, list, link }) {
       <div className="row">
 
         {
-          list.length > 0 
-          ? list.map((item) => {
+          list?.length > 0 
+          ? list?.map((item) => {
               return (
                   <div className="col col-3">
                     <MovieSnippet key={item?.imdbID} imdbId={item?.imdbID}  poster={item?.Poster} year={item?.Year} key={item?.imdbID} name={item?.Title} />
