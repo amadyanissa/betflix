@@ -14,6 +14,8 @@ export default function SearchInput() {
   const query = router.query.s 
   const { showRecommendations, searchGlobal} = useSelector(({ recommendation }) => recommendation);
   const [show, setShow] = useState(false)
+
+  const [hover, setHover] = useState(false)
   console.log(show)
   const onSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +47,7 @@ export default function SearchInput() {
   useEffect(() => {
     hide()
     setShow(false)
+    setSearch(query)
   },[query])
 
   const onClick = async(title) => {
@@ -64,9 +67,11 @@ export default function SearchInput() {
     })
   }
 
+  
+
   return(
-    <div>
-    <div className={style['search-dropdown']}>
+    <div onMouseOver={() => setHover(true)}> 
+    <div  className={style['search-dropdown']}>
       <div className={style['search-container']}>
         <form onSubmit={onSubmit}>
           <input
@@ -80,8 +85,8 @@ export default function SearchInput() {
         </form>
       </div>
       {
-        showRecommendations && 
-          <div className={style["dropdown-content"]}>
+        hover && 
+          <div onMouseLeave={() => setHover(false)} className={style["dropdown-content"]}>
           <div className={style["group"]}>
             {
               recommendationMovies?.length > 0 
