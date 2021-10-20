@@ -9,12 +9,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
   const {homeMovies, homeSeries, homeEpisodes} = useSelector(({ homeList }) => homeList);
 
   useEffect(async() => {
+    setLoading(true)
     const movieList = await getMovieList(1);
     const seriesList = await getSeriesList(1);
     const episodeList = await getEpisodeList(1);
+    setLoading(false)
     dispatch({
       type: "SET_HOME_MOVIE",
       movies: movieList?.Search?.length >=4 ? movieList?.Search.slice(0,4) : movieList?.Search
@@ -33,16 +36,15 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      
       <Layout>
         <div>
-          <SectionList sectionTitle="Film" list={homeMovies.length > 0 ? homeMovies : []} link={"/movies"} />
+          <SectionList sectionTitle="Film" list={homeMovies.length > 0 ? homeMovies : []} link={"/movies"} loading={loading} />
         </div>
         <div style={{marginTop: "2rem"}}>
-          <SectionList sectionTitle="Series" list={homeSeries && homeSeries.length > 0 ? homeSeries : []} link={"/series"}/>
+          <SectionList sectionTitle="Series" list={homeSeries && homeSeries.length > 0 ? homeSeries : []} link={"/series"} loading={loading}/>
         </div>
         <div style={{marginTop: "2rem"}}>
-          <SectionList sectionTitle="Episode" list={homeEpisodes && homeEpisodes.length > 0 ? homeEpisodes : []} link={"/episodes"} />
+          <SectionList sectionTitle="Episode" list={homeEpisodes && homeEpisodes.length > 0 ? homeEpisodes : []} link={"/episodes"} loading={loading} />
         </div>
       </Layout>
     </div>

@@ -1,17 +1,12 @@
 import styled from "styled-components"
 
-const LoadingComponent = styled.h1`
-  background: white;
-  color: red;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 100;
-  padding: 10px;
-  border-radius: 10px
+const LoadingComponent = styled.h4`
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `
 
-export default function Loading () {
+export default function LoadingText () {
   return (
     // <h1 style={{background: "white", color: "red", position: "fixed", bottom: "0", zIndex: "10000", padding: "10px"}} >Loading.....</h1>
     <LoadingComponent>
