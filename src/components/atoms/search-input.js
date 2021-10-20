@@ -70,7 +70,7 @@ export default function SearchInput() {
   
 
   return(
-    <div onMouseOver={() => setHover(true)}> 
+    <div onMouseOver={() => setHover(true)} onMouseLeave={() => setHover(false)}> 
     <div  className={style['search-dropdown']}>
       <div className={style['search-container']}>
         <form onSubmit={onSubmit}>
@@ -86,7 +86,7 @@ export default function SearchInput() {
       </div>
       {
         hover && 
-          <div onMouseLeave={() => setHover(false)} className={style["dropdown-content"]}>
+          <div onMouseLeave={() => setHover(false)} onMouseOver={() => setHover(true)} className={style["dropdown-content"]}>
           <div className={style["group"]}>
             {
               recommendationMovies?.length > 0 

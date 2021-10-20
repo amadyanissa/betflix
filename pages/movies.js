@@ -26,6 +26,10 @@ export default function Film() {
    
   },[query])
 
+  useEffect(async() => {
+    let search = await query
+    if (search) fetchMovies(page, query.s)
+  },[])
   useEffect(() => {
       window.onscroll = () => {
         if(document.documentElement.scrollTop+ document.documentElement.offsetHeight == document.documentElement.scrollHeight && router.pathname == "/movies") {
