@@ -37,10 +37,23 @@ export default function Film() {
 
    })
 
+  const lookForSeries = () => {
+    router.push({
+      pathname: "/search",
+      query: {
+        s: query.s
+      }
+    })
+  }
+
 
   return (
     <div className={styles.container}>
       <Layout>
+        {
+          query.s &&
+            <h6 onClick={() => lookForSeries() } className={styles.want}><span>Not what you are looking for? Search series or episode</span></h6>
+        }
         <div 
           className="row"
         >

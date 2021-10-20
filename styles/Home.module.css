@@ -114,6 +114,14 @@
   margin-left: 0.5rem;
 }
 
+.want {
+  cursor: pointer
+}
+
+.want > span:hover {
+  border-bottom: 1px solid white;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
