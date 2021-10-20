@@ -11,12 +11,12 @@ export default function SearchInput() {
   const [recommendationMovies, setRecommendationMovies] = useState([])
   const router = useRouter()
   const dispatch = useDispatch()
-
+  const query = router.query.s 
   const { showRecommendations, searchGlobal} = useSelector(({ recommendation }) => recommendation);
-
+  const [show, setShow] = useState(false)
   const onSubmit = (e) => {
     e.preventDefault();
-    router.push({
+    router.replace({
       pathname: "/search",
       query: {s: search}
     } )
@@ -25,17 +25,26 @@ export default function SearchInput() {
   const getRecomendation = async (title) => {
     const data = await getMovieList({search: title? title: search})
     setRecommendationMovies(data?.Search)
-    dispatch({
-      type: "SHOW_RECOMMENDATION",
-      showRecommendations: true
-    })
-   
+    if(show) {
+      dispatch({
+        type: "SHOW_RECOMMENDATION",
+        showRecommendations: true
+      })
+    }
   }
 
   useEffect(() => {
     if(search != "") getRecomendation(search);
     else hide()
   },[search])
+
+  
+
+  useEffect(() => {
+    // if(path === "/search") hide()
+    hide()
+    setShow(false)
+  },[query])
 
   const onClick = async(title) => {
    await dispatch({
@@ -61,6 +70,7 @@ export default function SearchInput() {
         <form onSubmit={onSubmit}>
           <input onFocus={() => {
             getRecomendation(searchGlobal)
+            setShow(true)
           }} placeholder="Title" value={search ? search : searchGlobal} onChange={(e) => setSearch(e.target.value)} />
 
           <button type="submit">Search</button>
