@@ -6,15 +6,21 @@ import { useRouter } from 'next/router'
 import { getById } from "../api/endpoints"
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Details.module.css'
+import { useDispatch } from "react-redux"
 
 export default function Details() {
  const router = useRouter();
- const {id} = router.query
+ const { id } = router.query
  const [data, setData] = useState(null)
+ const dispatch = useDispatch()
 
  useEffect(async() => {
   const detail = await getById(id)
   setData(detail)
+  dispatch({
+    type: "SHOW_RECOMMENDATION",
+    showRecommendations: false
+  })
  },[id])
  
   return (
