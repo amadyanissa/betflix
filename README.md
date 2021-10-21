@@ -4,6 +4,7 @@ Betflix is a movie database application that utilize:
 - React JS
 - Next JS
 - Axios
+- Redux
 
 ## Installation
 
